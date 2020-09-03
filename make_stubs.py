@@ -1,33 +1,36 @@
+# stdlib
 import functools
 import os
+import platform
 import re
+import sys
 from textwrap import dedent
 
+# 3rd party
 from domdf_python_tools.paths import PathPlus
-
-from dotnet_stub_builder.utils import tab_in
-from dotnet_stub_builder.type_conversion import Converter
 from dotnet_stub_builder.makers import make_module, make_package
-
-import sys
-import platform
+from dotnet_stub_builder.type_conversion import Converter
+from dotnet_stub_builder.utils import tab_in
 
 if platform.architecture()[0] == "64bit":
 	sys.path.append(os.path.abspath("../pyms-agilent/pyms_agilent/mhdac/x64"))
 else:
 	sys.path.append(os.path.abspath("../pyms-agilent/pyms_agilent/mhdac/x86"))
 
+# 3rd party
 import clr
 
 clr.AddReference("MassSpecDataReader")
 clr.AddReference("BaseCommon")
 clr.AddReference("BaseDataAccess")
 
+# this package
 import Agilent
 import Agilent.MassSpectrometry
 
 
 class AgilentConverter(Converter):
+
 	def __init__(self):
 		super().__init__({
 				"Agilent.MassSpectrometry.WtcCalibration": "Any",
@@ -43,7 +46,8 @@ class AgilentConverter(Converter):
 			return re.match(r"^Agilent\.MassSpectrometry\.DataAnalysis\.([A-Za-z_]+)$", csharp_type).group(1)
 
 		elif re.match(r"^Agilent\.MassSpectrometry\.DataAnalysis\.([A-Za-z_]+)\[]$", csharp_type):
-			csharp_type = re.match(r"^Agilent\.MassSpectrometry\.DataAnalysis\.([A-Za-z_]+)\[]$", csharp_type).group(1)
+			csharp_type = re.match(r"^Agilent\.MassSpectrometry\.DataAnalysis\.([A-Za-z_]+)\[]$",
+									csharp_type).group(1)
 			return f"List[{csharp_type}]"
 
 		elif re.match(r"^Agilent\.MassSpectrometry\.[A-Za-z_]+$", csharp_type):
@@ -113,7 +117,9 @@ def build_stubs():
 					],
 			[
 					"from pyms_agilent.enums import (",
-					tab_in(dedent("""\
+					tab_in(
+							dedent(
+									"""\
 					DeviceType,
 					StoredDataType,
 					DataUnit,
@@ -128,8 +134,11 @@ def build_stubs():
 					SampleCategory,
 					IonizationMode,
 					TofMsProcessingMode,
-					)"""))
-					])
+					)"""
+									)
+							)
+					]
+			)
 
 
 if __name__ == '__main__':
