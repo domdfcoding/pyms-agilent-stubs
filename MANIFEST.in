@@ -1,0 +1,7 @@
+include __pkginfo__.py
+include LICENSE
+include requirements.txt
+prune **/__pycache__
+graft Agilent-stubs
+recursive-include Agilent-stubs *.pyi
+include Agilent-stubs/py.typed
