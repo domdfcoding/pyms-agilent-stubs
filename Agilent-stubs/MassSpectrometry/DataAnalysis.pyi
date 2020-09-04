@@ -2053,9 +2053,6 @@ class IBDAMSScanFileInformation:
     @property
     def SpectraFormat(self): ...
 
-    @SpectraFormat.setter
-    def SpectraFormat(self, value): ...
-
     @property
     def TotalScansPresent(self): ...
 
