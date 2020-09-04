@@ -35,6 +35,9 @@ class AgilentConverter(Converter):
 		super().__init__({
 				"Agilent.MassSpectrometry.WtcCalibration": "Any",
 				"Agilent.MassSpectrometry.MIDAC.FragmentationOpMode": "Any",
+				"Agilent.MassSpectrometry.MIDAC.FragmentationClass": "Any",
+				"KeyCollection": "Any",
+				"ValueCollection": "Any",
 				})
 
 	def convert_type(self, csharp_type: str) -> str:
@@ -145,8 +148,24 @@ def build_stubs():
 					"BDAPeakSpecFilter",
 					"IBDAPeakSpecFilter",
 					"IBDAPeak",
+					"IBdaMsScanRecordCollection",
+					"IBDAMultiEicParameters",
+					"IBDAPeakSpectrumParameters",
+					"IBDASpecPair",
+					"ILwChromPeak",
+					"BDAPeak",
+					"IImsFrameRecord",
+					"ImsFrameScanRec",
+					"BDASpecFilter",
+					"ImsFrameMethod",
+					"PointValueFormat",
+					"BDAActualData",
+					"MsdrChargeStateAssignmentFilter",
 					],
 			[
+					'',
+					"from typing import Optional, overload, Tuple, Union",
+					'',
 					"from pyms_agilent.enums import (",
 					tab_in(
 							dedent(
@@ -165,9 +184,15 @@ def build_stubs():
 					SampleCategory,
 					IonizationMode,
 					TofMsProcessingMode,
+					DataFileValueDataType,
+					PointValueStorageScheme,
 					)"""
 									)
-							)
+							),
+					'',
+					"IonPolarity = Optional[int]",
+					"SmoothingFunctionType = Any",
+					'',
 					]
 			)
 
