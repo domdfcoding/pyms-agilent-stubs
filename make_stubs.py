@@ -203,6 +203,8 @@ with extra_imports.with_indent("    ", 2):
 			"DesiredMSStorageType,",
 			"ApseBackgroundSource,",
 			"IonDetectorGain,",
+			"FragmentationOpMode,",
+			"FragmentationClass,",
 			")",
 			])
 
