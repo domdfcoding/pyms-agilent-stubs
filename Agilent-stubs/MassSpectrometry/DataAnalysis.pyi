@@ -63,7 +63,8 @@ class BDAFileInformation:
     def __init__(self, *args, **kwargs) -> Any: ...
     def Close(self) -> None: ...
 
-    def CombineFileInformation(self,
+    def CombineFileInformation(
+            self,
             _: List[IBDAFileInformation],
             ) -> IBDAFileInformation: ...
 
@@ -392,7 +393,8 @@ class BDAChromData:
     def Clear(self) -> None: ...
     def Clone(self) -> IBDAChromData: ...
 
-    def CreateBDAChromData(self,
+    def CreateBDAChromData(
+            self,
             _: List[float],
             __: List[float],
             ___: BDAChromFilter,
@@ -538,7 +540,8 @@ class MSOverallScanRecordInfo:
     @FragmentorVoltage.setter
     def FragmentorVoltage(self, value): ...
 
-    def GetFilteredOnDetails(self,
+    def GetFilteredOnDetails(
+            self,
             _: bool,
             __: bool,
             ___: bool,
@@ -826,7 +829,8 @@ class IMsdrDataReader:
     @FileInformation.setter
     def FileInformation(self, value: BDAMSScanFileInformation): ...
 
-    def GetBPC(self,
+    def GetBPC(
+        self,
             startTime: float,
             endTime: float,
             scanType: MSScanType,
@@ -836,14 +840,16 @@ class IMsdrDataReader:
 
     def GetChromatogram(self, chromFilter: IBDAChromFilter) -> List[BDAChromData]: ...
 
-    def GetEIC(self,
+    def GetEIC(
+        self,
             massOfInterest: List[float],
             scanType: MSScanType,
             ionPolarity: IonPolarity,
             ionMode: IonizationMode,
             ) -> BDAChromData: ...
 
-    def GetEICForEachMass(self,
+    def GetEICForEachMass(
+            self,
             massOfInterest: List[float],
             scanType: MSScanType,
             ionPolarity: IonPolarity,
@@ -1546,7 +1552,8 @@ class BDADataAccess:
     def Finalize(self) -> None: ...
     def GetActualsForTimeRange(self, _: float, __: float) -> List[IBDAActualData]: ...
 
-    def GetActualsdDefinitionForTimeRange(self,
+    def GetActualsdDefinitionForTimeRange(
+            self,
             _: float,
             __: float,
             ) -> List[IBDAActualData]: ...
@@ -1555,7 +1562,8 @@ class BDADataAccess:
     def GetHashCode(self) -> int: ...
     def GetMsScanDirSize(self, _: str) -> int: ...
 
-    def GetSampleData(self,
+    def GetSampleData(
+            self,
             _: str,
             __: SampleCategory,
             ___: List[str],
@@ -2049,7 +2057,8 @@ class BDAProgressEventHandler:
 
     def __init__(self, *args, **kwargs) -> Any: ...
 
-    def BeginInvoke(self,
+    def BeginInvoke(
+            self,
             _: object,
             __: BDAProgressEventArgs,
             ___: Any,
@@ -2060,7 +2069,8 @@ class BDAProgressEventHandler:
     def Combine(self, _: Any, __: Any) -> Any: ...
     def CombineImpl(self, _: Any) -> Any: ...
 
-    def CreateDelegate(self,
+    def CreateDelegate(
+            self,
             _: Type,
             __: object,
             ___: str,
@@ -2077,7 +2087,8 @@ class BDAProgressEventHandler:
     def GetInvocationList(self) -> List[Any]: ...
     def GetMethodImpl(self) -> System.Reflection.MethodInfo: ...
 
-    def GetObjectData(self,
+    def GetObjectData(
+            self,
             _: System.Runtime.Serialization.SerializationInfo,
             __: System.Runtime.Serialization.StreamingContext,
             ) -> None: ...
@@ -3011,7 +3022,8 @@ class ChangeNotifyDelegate:
     def GetInvocationList(self) -> List[Any]: ...
     def GetMethodImpl(self) -> System.Reflection.MethodInfo: ...
 
-    def GetObjectData(self,
+    def GetObjectData(
+	        self,
             _: System.Runtime.Serialization.SerializationInfo,
             __: System.Runtime.Serialization.StreamingContext,
             ) -> None: ...
@@ -4585,20 +4597,18 @@ class IBDADataAccess:
     def GetActualValue(self, _: str, __: List[float], ___: List[float]) -> None: ...
     def GetActuals(self, _: float) -> System.Data.DataSet: ...
 
-    def GetChromatogram(self,
+    def GetChromatogram(
+            self,
             _: IBDAChromFilter,
             __: List[IRange],
             ) -> List[IBDAChromData]: ...
 
     def GetDataDependentScanInfo(self) -> IBdaMsScanRecordCollection: ...
-
-    def GetElementNameCollection(self,
-            _: int,
-            ) -> System.Collections.Generic.Dictionary[float, str]: ...
-
+    def GetElementNameCollection(self, _: int) -> Dict[float, str]: ...
     def GetMSScanInformation(self, _: float) -> IBDAMSScanFileInformation: ...
 
-    def GetMultipleEicChromatograms(self,
+    def GetMultipleEicChromatograms(
+            self,
             _: IBDAMultiEicParameters,
             ) -> List[IBDAChromData]: ...
 
@@ -4632,12 +4642,7 @@ class IBDADataAccess:
     @QqqAcqMethodReader.setter
     def QqqAcqMethodReader(self, value): ...
 
-    def ReadSpectrum(self,
-            _: int,
-            __: bool,
-            ___: DesiredMSStorageType,
-            ) -> IBDASpecData: ...
-
+    def ReadSpectrum(self, _: int, __: bool, ___: DesiredMSStorageType) -> IBDASpecData: ...
     def ReadSpectrumPair(self, _: IBDAPeakSpectrumParameters) -> List[IBDASpecPair]: ...
     def RefreshDataFile(self, _: bool) -> bool: ...
     def SaveUserCalibration(self, _: Any, __: IonPolarity) -> None: ...
@@ -5273,24 +5278,22 @@ class IBDAReadChromatogram:
 
     def __init__(self, *args, **kwargs) -> Any: ...
 
-    def GetChromatogram(self,
+    def GetChromatogram(
+            self,
             _: IBDAChromFilter,
             __: List[IRange],
             ) -> List[IBDAChromData]: ...
 
-    def GetMultipleEicChromatograms(self,
+    def GetMultipleEicChromatograms(
+            self,
             _: IBDAMultiEicParameters,
             ) -> List[IBDAChromData]: ...
 
 
 class IBDAReadSpectra:
 
-    def ReadSpectrum(self,
-            _: int,
-            __: bool,
-            ___: DesiredMSStorageType,
-            ) -> IBDASpecData: ...
-
+    def __init__(self, *args, **kwargs) -> Any: ...
+    def ReadSpectrum(self, _: int, __: bool, ___: DesiredMSStorageType) -> IBDASpecData: ...
     def ReadSpectrumPair(self, _: IBDAPeakSpectrumParameters) -> List[IBDASpecPair]: ...
 
 
@@ -5485,7 +5488,8 @@ class IBdaMsScanRecordCollection:
     @Keys.setter
     def Keys(self, value): ...
 
-    def Select(self,
+    def Select(
+            self,
             _: IonPolarity,
             __: MSLevel,
             ___: List[IRange],
