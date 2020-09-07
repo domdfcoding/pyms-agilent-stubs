@@ -1,0 +1,2 @@
+domdf_python_tools>=0.7.0
+pythonnet; platform_system=="Windows"

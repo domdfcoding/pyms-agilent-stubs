@@ -4,13 +4,12 @@ import os
 import platform
 import re
 import sys
-from textwrap import dedent
 
 # 3rd party
 from domdf_python_tools.paths import PathPlus
+from domdf_python_tools.stringlist import StringList
 from dotnet_stub_builder.makers import make_module, make_package
 from dotnet_stub_builder.type_conversion import Converter
-from dotnet_stub_builder.utils import tab_in
 
 if platform.architecture()[0] == "64bit":
 	sys.path.append(os.path.abspath("../pyms-agilent/pyms_agilent/mhdac/x64"))
@@ -36,8 +35,15 @@ class AgilentConverter(Converter):
 				"Agilent.MassSpectrometry.WtcCalibration": "Any",
 				"Agilent.MassSpectrometry.MIDAC.FragmentationOpMode": "Any",
 				"Agilent.MassSpectrometry.MIDAC.FragmentationClass": "Any",
+				"System.Collections.Generic.Dictionary": "Dict",
+				"SortDirection": "Any",
 				"KeyCollection": "Any",
 				"ValueCollection": "Any",
+				"IonPolarity": "Any",
+				"SmoothingFunctionType": "Any",
+				"System.Collections.Generic.List`1[System.Int16]": "List[int]",
+				"System.Collections.Generic.IEnumerable`1[System.Collections.Generic.KeyValuePair`2[System.Int32,"
+				"Agilent.MassSpectrometry.DataAnalysis.IBdaMsScanRecInfo]]": "Any",
 				})
 
 	def convert_type(self, csharp_type: str) -> str:
@@ -65,19 +71,7 @@ make_package = functools.partial(make_package, converter=AgilentConverter())
 make_module = functools.partial(make_module, converter=AgilentConverter())
 
 
-def build_stubs():
-	stubs_dir = PathPlus("Agilent-stubs")
-	(stubs_dir / "__init__.pyi").touch(exist_ok=True)
-	(stubs_dir / "MassSpectrometry").maybe_make(parents=True)
-	(stubs_dir / "MassSpectrometry" / "__init__.pyi").touch(exist_ok=True)
-
-	make_package("Agilent", Agilent, [])
-	make_package("Agilent.MassSpectrometry", Agilent.MassSpectrometry, [])
-
-	make_module(
-			"Agilent.MassSpectrometry.DataAnalysis",
-			Agilent.MassSpectrometry.DataAnalysis,
-			[
+attr_list = [
 					"BDAFileInformation",
 					"IBDAFileInformation",
 					"IBDAChromData",
@@ -161,39 +155,69 @@ def build_stubs():
 					"PointValueFormat",
 					"BDAActualData",
 					"MsdrChargeStateAssignmentFilter",
-					],
-			[
-					'',
-					"from typing import Optional, overload, Tuple, Union",
-					'',
-					"from pyms_agilent.enums import (",
-					tab_in(
-							dedent(
-									"""\
-					DeviceType,
-					StoredDataType,
-					DataUnit,
-					DataValueType,
-					ChromType,
-					ChromSubType,
-					MSLevel,
-					MSScanType,
-					MSStorageMode,
-					SpecType,
-					SpecSubType,
-					SampleCategory,
-					IonizationMode,
-					TofMsProcessingMode,
-					DataFileValueDataType,
-					PointValueStorageScheme,
-					)"""
-									)
-							),
-					'',
-					"IonPolarity = Optional[int]",
-					"SmoothingFunctionType = Any",
-					'',
+					"IFragEnergySegmentEndPoint",
+					"IBdaMsScanRecInfo",
+					"IEicRtMzRanges",
+					"LwPeakAttribute",
+					"LwPeakEndFlags",
+					"LwPeakWarning",
+					"IImsScanRecord",
+					"IMsSpecAccessParams",
+					"IMsSpectrumFmt",
+					"IMsValueFmt",
 					]
+
+extra_imports = StringList([
+		'',
+		"from typing import Optional, overload, Tuple, Union",
+		'',
+		"from pyms_agilent.enums import ("
+		])
+
+with extra_imports.with_indent("    ", 2):
+	extra_imports.extend([
+			"DeviceType,",
+			"StoredDataType,",
+			"DataUnit,",
+			"DataValueType,",
+			"ChromType,",
+			"ChromSubType,",
+			"MSLevel,",
+			"MSScanType,",
+			"MSStorageMode,",
+			"SpecType,",
+			"SpecSubType,",
+			"SampleCategory,",
+			"IonizationMode,",
+			"TofMsProcessingMode,",
+			"DataFileValueDataType,",
+			"PointValueStorageScheme,",
+			"ImsFrameType,",
+			"DesiredMSStorageType,",
+			"ApseBackgroundSource,",
+			"IonDetectorGain,",
+			")",
+			])
+
+extra_imports.blankline(ensure_single=True)
+extra_imports.extend(["IonPolarity = Optional[int]", "SmoothingFunctionType = Any"])
+extra_imports.blankline(ensure_single=True)
+
+
+def build_stubs():
+	stubs_dir = PathPlus("Agilent-stubs")
+	(stubs_dir / "__init__.pyi").touch(exist_ok=True)
+	(stubs_dir / "MassSpectrometry").maybe_make(parents=True)
+	(stubs_dir / "MassSpectrometry" / "__init__.pyi").touch(exist_ok=True)
+
+	make_package("Agilent", Agilent, [])
+	make_package("Agilent.MassSpectrometry", Agilent.MassSpectrometry, [])
+
+	make_module(
+			"Agilent.MassSpectrometry.DataAnalysis",
+			Agilent.MassSpectrometry.DataAnalysis,
+			attr_list,
+			list(extra_imports)
 			)
 
 
