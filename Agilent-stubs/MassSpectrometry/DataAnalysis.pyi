@@ -759,16 +759,13 @@ class IMsdrDataReader:
     @property
     def FileInformation(self) -> BDAMSScanFileInformation: ...
 
-    @FileInformation.setter
-    def FileInformation(self, value: BDAMSScanFileInformation): ...
-
     def GetBPC(
         self,
-            startTime: float,
-            endTime: float,
-            scanType: MSScanType,
-            ionPolarity: IonPolarity,
-            ionMode: IonizationMode,
+            startTime: float = ...,
+            endTime: float = ...,
+            scanType: MSScanType = ...,
+            ionPolarity: IonPolarity = ...,
+            ionMode: IonizationMode = ...,
             ) -> BDAChromData: ...
 
     def GetChromatogram(self, chromFilter: IBDAChromFilter) -> List[BDAChromData]: ...
@@ -802,10 +799,36 @@ class IMsdrDataReader:
             peakFilter: MsdrPeakFilter = ...,
             ) -> BDASpecData: ...
 
-    # TODO: _2
-    # TODO: _3
-    # TODO: _4
-    # TODO: _5
+    # _2
+    @overload
+    def GetSpectrum(
+            self,
+            rtRange: IRange,
+            peakFilter: IMsdrPeakFilter=...,
+            ) -> IBDASpecData: ...
+
+    # _3
+    @overload
+    def GetSpectrum(
+            self,
+            rtRanges: List[IRange],
+            peakFilter: IMsdrPeakFilter = ...,
+            ) -> IBDASpecData: ...
+
+    # _4
+    @overload
+    def GetSpectrum(
+            self,
+            specFilter: IBDASpecFilter,
+            peakFilter: IMsdrPeakFilter = ...,
+            ) -> List[IBDASpecData]: ...
+
+    # _5
+    @overload
+    def GetSpectrum(
+            self,
+            specFilter: IBDASpecFilter,
+            ) -> List[IBDASpecData]: ...
 
     # _6
     @overload
@@ -815,8 +838,27 @@ class IMsdrDataReader:
             peakMSMSFilter: MsdrPeakFilter,
             ) -> BDASpecData: ...
 
-    # TODO: _7
-    # TODO: _8
+    # _7
+    @overload
+    def GetSpectrum(
+            self,
+            retentionTime: float,
+            scanType: MSScanType,
+            ionPolarity: IonPolarity,
+            ionMode: IonizationMode,
+            peakFilter: IMsdrPeakFilter,
+            peakFilterOnCentroid: bool,
+            ) -> IBDASpecData: ...
+
+    # _8
+    @overload
+    def GetSpectrum(
+            self,
+            rowNumber: int,
+            peakMSFilter: IMsdrPeakFilter,
+            peakMSMSFilter: IMsdrPeakFilter,
+            storageType: DesiredMSStorageType,
+            ) -> IBDASpecData: ...
 
     def GetSpectrum(self, *args: Any, **kwargs: Any) -> BDASpecData: ...
 
