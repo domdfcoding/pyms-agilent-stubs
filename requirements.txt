@@ -1,1 +1,1 @@
-dotnet-stubs>=0.0.11
+dotnet-stubs>=0.0.12
