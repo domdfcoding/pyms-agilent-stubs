@@ -209,7 +209,7 @@ with extra_imports.with_indent("    ", 2):
 			])
 
 extra_imports.blankline(ensure_single=True)
-extra_imports.extend(["IonPolarity = Optional[int]", "SmoothingFunctionType = Any"])
+extra_imports.extend(["IonPolarity = int", "SmoothingFunctionType = Any"])
 extra_imports.blankline(ensure_single=True)
 
 
