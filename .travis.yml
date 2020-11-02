@@ -2,11 +2,14 @@
 ---
 
 language: python
-dist: xenial
+dist: focal
 cache: pip
 python:
   - '3.6'
 
+arch:
+  - amd64
+  - arm64
 install:
 
   - pip install --upgrade pip
@@ -14,7 +17,7 @@ install:
 
 
 script:
-  - tox
+  - tox -vv
 
 
 stages:
@@ -24,7 +27,16 @@ stages:
 
 
 jobs:
+  allow_failures:
+    - arch: arm64
+
+  exclude:
+
   include:
+    - stage: test
+      dist: bionic
+      python: 3.8
+
     - stage: deploy_pypi
       python: "3.6"
       script: skip
