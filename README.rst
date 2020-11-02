@@ -17,8 +17,7 @@ pyms-agilent-stubs
 
 	* - Tests
 	  - |travis| |actions_windows| |actions_macos| |codefactor| |pre_commit_ci|
-	* - PyPI
-	  - |pypi-version| |supported-versions| |supported-implementations| |wheel|
+
 	* - Activity
 	  - |commits-latest| |commits-since| |maintained|
 	* - Other
@@ -89,20 +88,3 @@ pyms-agilent-stubs
 	:alt: pre-commit.ci status
 
 .. end shields
-
-|
-
-Installation
---------------
-
-.. start installation
-
-``pyms-agilent-stubs`` can be installed from PyPI.
-
-To install with ``pip``:
-
-.. code-block:: bash
-
-	$ python -m pip install pyms-agilent-stubs
-
-.. end installation
