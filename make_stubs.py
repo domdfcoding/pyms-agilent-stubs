@@ -205,7 +205,7 @@ with extra_imports.with_indent("    ", 2):
 			"IonDetectorGain,",
 			"FragmentationOpMode,",
 			"FragmentationClass,",
-			")",
+			')',
 			])
 
 extra_imports.blankline(ensure_single=True)
@@ -230,6 +230,6 @@ def build_stubs():
 			)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 	build_stubs()
 	print("Done!")
