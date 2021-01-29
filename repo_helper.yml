@@ -19,3 +19,11 @@ stubs_package: true
 
 manifest_additional:
   - graft Agilent-stubs
+
+python_versions:
+  - 3.6
+  - 3.7
+  - 3.8
+  - 3.9
+
+python_deploy_version: 3.7
