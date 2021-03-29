@@ -4,8 +4,6 @@ name: mypy
 
 on:
   push:
-  pull_request:
-    branches: ["master"]
 
 jobs:
   Run:
@@ -14,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        os: ['windows-2019', 'macos-latest', 'ubuntu-20.04']
+        os: ['ubuntu-20.04', 'windows-2019']
       fail-fast: false
 
     steps:
@@ -24,14 +22,14 @@ jobs:
       - name: Setup Python 🐍
         uses: "actions/setup-python@v2"
         with:
-          python-version: "3.6"
+          python-version: "3.7"
 
       - name: Install dependencies 🔧
         run: |
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
-          python -m pip install tox
+          python -m pip install --upgrade tox virtualenv
 
       - name: "Run mypy"
         run: "python -m tox -e mypy"
