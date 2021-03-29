@@ -4,8 +4,6 @@ name: macOS
 
 on:
   push:
-  pull_request:
-    branches: ["master"]
 
 jobs:
   tests:
@@ -13,13 +11,16 @@ jobs:
     runs-on: "macos-latest"
     continue-on-error: ${{ matrix.config.experimental }}
     env:
-      USING_COVERAGE: '3.6'
+      USING_COVERAGE: '3.6,3.7,3.8,3.9'
 
     strategy:
       fail-fast: False
       matrix:
         config:
           - {python-version: "3.6", testenvs: "py36,build", experimental: False}
+          - {python-version: "3.7", testenvs: "py37,build", experimental: False}
+          - {python-version: "3.8", testenvs: "py38,build", experimental: False}
+          - {python-version: "3.9", testenvs: "py39,build", experimental: False}
 
     steps:
       - name: Checkout 🛎️
