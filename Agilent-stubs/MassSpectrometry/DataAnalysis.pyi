@@ -976,6 +976,15 @@ class IBDAActuals:
 
 	def GetActuals(self, _: float) -> System.Data.DataSet: ...
 	def IsActualsPresent(self) -> bool: ...
+	def GetTimeSegmentsIDArray(self) -> List[int]: ...
+
+	def GetSampleData(
+			self,
+			_: str,
+			__: pyms_agilent.enums.SampleCategory,
+			*args,
+			**kwargs,
+			): ...
 
 class IBDAChromFilter:
 
