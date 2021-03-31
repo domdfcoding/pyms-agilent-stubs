@@ -1,1 +1,1 @@
-pyms_agilent
+pyms_agilent>=0.1.2
