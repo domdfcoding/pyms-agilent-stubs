@@ -5,7 +5,8 @@ import_name: Agilent
 copyright_years: 2020
 author: 'Dominic Davis-Foster'
 email: 'dominic@davis-foster.co.uk'
-username: 'domdfcoding'
+username: 'PyMassSpec'
+assignee: 'domdfcoding'
 version: '0.0.0'
 license: 'MIT'
 short_desc: 'Stubs package for pyms-agilent .NET components.'

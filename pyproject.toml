@@ -19,8 +19,8 @@ name = "Dominic Davis-Foster"
 file = "LICENSE"
 
 [project.urls]
-Homepage = "https://github.com/domdfcoding/pyms-agilent-stubs"
-"Issue Tracker" = "https://github.com/domdfcoding/pyms-agilent-stubs/issues"
-"Source Code" = "https://github.com/domdfcoding/pyms-agilent-stubs"
+Homepage = "https://github.com/PyMassSpec/pyms-agilent-stubs"
+"Issue Tracker" = "https://github.com/PyMassSpec/pyms-agilent-stubs/issues"
+"Source Code" = "https://github.com/PyMassSpec/pyms-agilent-stubs"
 
 [tool.importcheck]
